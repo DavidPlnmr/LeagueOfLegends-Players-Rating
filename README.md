@@ -1,6 +1,6 @@
 # Leaguepedia Client
 
-This is a NON-OFFICIAL client for the Leaguepedia API. It is written in Python 3.6 and is currently in development.
+This is a NON-OFFICIAL client for the Leaguepedia API. It is written in Python 3.11 and is currently in development.
 
 ## Installation
 
