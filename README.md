@@ -4,6 +4,8 @@ This is a NON-OFFICIAL client for the Leaguepedia API. It is written in Python 3
 
 ## Installation
 
+### From source
+
 To install the client, run the following command:
 
 ```bash
@@ -17,3 +19,5 @@ Then you just have to import the client in your project:
 ```python
 from leaguepedia_client import LeaguepediaClient
 ```
+
+I'll probably upload it to PyPI when it's ready for production.
