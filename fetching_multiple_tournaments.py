@@ -21,7 +21,9 @@ def process_tournament(tournament):
     games_data_from_tournament = []
     games = client.get_games_from_tournament(tournament['OverviewPage'])
     for game in games:
-        game_data = client.get_game_data(game["RiotPlatformGameId"])
+
+        game_data = client.get_game_data(
+            game["RiotPlatformGameId"], game["Blue"], game["Red"])
         participants_stats = stats_parser.get_participants_stats_from_game_any_version(
             game_data)
         games_data_from_tournament.extend(participants_stats)

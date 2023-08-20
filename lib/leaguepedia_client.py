@@ -116,7 +116,11 @@ class LeaguepediaClient:
 
         return response
 
-    def get_game_data_with_version(self, riot_platform_game_id: str, version: Literal[4, 5]):
+    def get_game_data_with_version(self,
+                                   riot_platform_game_id: str,
+                                   blue_team_name: str = None,
+                                   red_team_name: str = None,
+                                   version: int = 4):
         """
         Returns a dictionary with the game data
         :param riot_platform_game_id: Riot Platform Game id
@@ -125,6 +129,9 @@ class LeaguepediaClient:
         You must be sure that you are using the correct version. If you are not sure, use version 4.
         Otherwise, you can try with `get_game_data(riot_platform_game_id)`.
         """
+        if version not in [4, 5]:
+            raise ValueError("Version must be 4 or 5")
+
         response = None
         if riot_platform_game_id is None:
             raise Exception(
@@ -135,9 +142,15 @@ class LeaguepediaClient:
         except:
             raise Exception("Error getting game data")
 
+        # Assuming response[0] is a dictionary, you can add the blueTeam and redTeam keys here
+        response[0]['blueTeam'] = blue_team_name
+        response[0]['redTeam'] = red_team_name
         return response[0]
 
-    def get_game_data(self, riot_platform_game_id: str):
+    def get_game_data(self, riot_platform_game_id: str,
+                      blue_team_name: str = None,
+                      red_team_name: str = None
+                      ):
         """
         Returns a dictionary with the game data
         :param riot_platform_game_id: Riot Platform Game id
@@ -147,7 +160,15 @@ class LeaguepediaClient:
         """
         try:
             # Try with version 4
-            return self.get_game_data_with_version(riot_platform_game_id, 4)
+            return self.get_game_data_with_version(
+                riot_platform_game_id=riot_platform_game_id,
+                blue_team_name=blue_team_name,
+                red_team_name=red_team_name,
+                version=4)
         except:
             # Try with version 5
-            return self.get_game_data_with_version(riot_platform_game_id, 5)
+            return self.get_game_data_with_version(
+                riot_platform_game_id=riot_platform_game_id,
+                blue_team_name=blue_team_name,
+                red_team_name=red_team_name,
+                version=5)

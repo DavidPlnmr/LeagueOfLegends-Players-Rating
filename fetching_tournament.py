@@ -1,6 +1,6 @@
 # Author: David Paulino
 # Date: 2023-08-06
-# Usage : python get_data_from_tournaments.py
+# Usage : python fetching_tournament.py
 # Dependencies: pandas, mwrogue
 # Description : Get data from tournaments and save it to a csv file
 
@@ -52,7 +52,8 @@ whole_data_games = []
 count = 0
 for game in games:
     # Get data from the game
-    game_data = client.get_game_data(game["RiotPlatformGameId"])
+    game_data = client.get_game_data(
+        game["RiotPlatformGameId"], game["Blue"], game["Red"])
 
     participants_stats = stats_parser.get_participants_stats_from_game_any_version(
         game_data)
@@ -66,6 +67,11 @@ for game in games:
 df = pd.DataFrame(whole_data_games)
 print(df.shape)
 
-file_name = tournament_overview_page.replace("/", "_").replace(" ", "_")
+
+# Find the name of the tournament based on the overview page
+tournament_name = [
+    tournament["Name"] for tournament in tournaments if tournament["OverviewPage"] == tournament_overview_page]
+print(tournament_name)
+file_name = tournament_name[0].replace(" ", "_")
 # Save the data to a csv file
 df.to_csv("data/" + file_name + ".csv", index=False)

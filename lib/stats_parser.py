@@ -47,6 +47,8 @@ class StatsParser:
                 "championId": participant["championId"],
                 "championName": championName,
                 "teamId": participant["teamId"],
+                "blueTeam": game_json["blueTeam"],
+                "redTeam": game_json["redTeam"],
                 "role": role,
                 # Get only the chars before the second dot
                 "patch": '.'.join(game_json["gameVersion"].split(".")[0:2]),
@@ -72,6 +74,9 @@ class StatsParser:
             participants_data.append({
                 "gameId": gameId,
                 "patch": patch,
+                "participantId": participant["participantId"],
+                "blueTeam": game_json["blueTeam"],
+                "redTeam": game_json["redTeam"],
                 # Add the role
                 "role": role,
                 # Get the data except the data above
