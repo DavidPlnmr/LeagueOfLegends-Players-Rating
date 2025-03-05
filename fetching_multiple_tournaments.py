@@ -13,8 +13,8 @@ import pandas as pd
 
 client = LeaguepediaClient()
 stats_parser = StatsParser()
-tournament_names = ["LFL 20%%", "LCK 20%%", "MSI 20%%", "Worlds 20%% %"]
-years = ["2022", "2023"]
+tournament_names = ["LFL 20%%", "LCK 20%%", "LEC 20%%"]
+years = ["2025"]
 
 
 def process_tournament(tournament):
